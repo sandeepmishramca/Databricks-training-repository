@@ -1,10 +1,10 @@
 # Databricks notebook source
 from myfunctions import *
 
-tableName   = ""
-dbName      = ""
-columnName  = ""
-columnValue = ""
+tableName   = "diamonds"
+dbName      = "default"
+columnName  = "clarity"
+columnValue = "VVS2"
 
 # If the table exists in the specified database...
 if tableExists(tableName, dbName):

@@ -37,6 +37,8 @@ data = [ (1, 0.23, "Ideal",   "E", "SI2", 61.5, 55, 326, 3.95, 3.98, 2.43 ), \
          (2, 0.21, "Premium", "E", "SI1", 59.8, 61, 326, 3.89, 3.84, 2.31 ) ]
 
 df = spark.createDataFrame(data, schema)
+tablename = dbName + "." + tableName
+df.write.format("delta").mode("overwrite").saveAsTable(tablename)
 
 # Does the table exist?
 def test_tableExists():
