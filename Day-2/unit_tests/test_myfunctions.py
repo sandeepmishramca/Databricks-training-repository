@@ -6,7 +6,7 @@ from pyspark.sql.types import StructType, StructField, IntegerType, FloatType, S
 
 tableName    = "diamonds"
 dbName       = "default"
-columnName   = "clarity"
+columnName   = "sample"
 columnValue  = "SI2"
 
 # Because this file is not a Databricks notebook, you
