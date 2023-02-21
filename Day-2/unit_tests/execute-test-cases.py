@@ -18,16 +18,21 @@ import pytest
 import os
 import sys
 
+
 repo_name = "unit_tests"
 
 # Get the path to this notebook, for example "/Workspace/Repos/{username}/{repo-name}".
 notebook_path = dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()
 
+print(notebook_path)
+
 # Get the repo's root directory name.
 repo_root = os.path.dirname(os.path.dirname(notebook_path))
 
+print(repo_root)
+
 # Prepare to run pytest from the repo.
-os.chdir(f"/Workspace/{repo_root}/{repo_name}")
+os.chdir(f"{repo_root}/{repo_name}")
 print(os.getcwd())
 
 # Skip writing pyc files on a readonly filesystem.
