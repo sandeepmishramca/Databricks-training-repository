@@ -26,7 +26,7 @@
 
 -- COMMAND ----------
 
--- MAGIC %run ../Includes/Classroom-Setup-02.5
+-- MAGIC %run ../../Includes/Classroom-Setup-02.5
 
 -- COMMAND ----------
 

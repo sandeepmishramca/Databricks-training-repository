@@ -16,8 +16,18 @@ CREATE OR REPLACE TEMPORARY VIEW low_temps
 
 -- COMMAND ----------
 
+select * from high_temps limit 10
+
+-- COMMAND ----------
+
 -- MAGIC %md # Pivoting in SQL
 -- MAGIC Getting the monthly average high temperatures with month as columns and year as rows.
+
+-- COMMAND ----------
+
+SELECT year(date) year, month(date) month, temp
+  FROM high_temps
+  WHERE date BETWEEN DATE '2015-01-01' AND DATE '2018-08-31'
 
 -- COMMAND ----------
 

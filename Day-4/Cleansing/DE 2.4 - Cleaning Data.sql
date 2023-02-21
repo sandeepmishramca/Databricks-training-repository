@@ -134,6 +134,24 @@ SELECT count(*) FROM deduped_users
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC 
+-- MAGIC ##### Usage of analytic functions to filter unique values
+
+-- COMMAND ----------
+
+CREATE OR REPLACE TEMP VIEW deduped_users AS 
+SELECT user_id, user_first_touch_timestamp, email, updated
+FROM
+(SELECT user_id, user_first_touch_timestamp, email, updated, row_number() over (partition by user_id, user_first_touch_timestamp order by email, updated desc) as rn
+FROM users_dirty
+WHERE user_id IS NOT NULL)
+where rn=1;
+
+SELECT count(*) FROM deduped_users
+
+-- COMMAND ----------
+
 -- MAGIC %python
 -- MAGIC from pyspark.sql.functions import max
 -- MAGIC dedupedDF = (usersDF
@@ -265,11 +283,3 @@ FROM (
 
 -- MAGIC %python
 -- MAGIC DA.cleanup()
-
--- COMMAND ----------
-
--- MAGIC %md-sandbox
--- MAGIC &copy; 2023 Databricks, Inc. All rights reserved.<br/>
--- MAGIC Apache, Apache Spark, Spark and the Spark logo are trademarks of the <a href="https://www.apache.org/">Apache Software Foundation</a>.<br/>
--- MAGIC <br/>
--- MAGIC <a href="https://databricks.com/privacy-policy">Privacy Policy</a> | <a href="https://databricks.com/terms-of-use">Terms of Use</a> | <a href="https://help.databricks.com/">Support</a>
